@@ -1,12 +1,29 @@
 
+import { BrowserRouter , Route , Routes , Navigate} from "react-router-dom"
 import './App.css'
+import LoginPage from './pages/LoginPage'
+import Layout from "./pages/Layout"
+import ListPage from "./pages/ListPage"
+import ChatPage from "./pages/ChatPage"
+import ProfilePage from "./pages/ProfilePage"
 
 function App() {
 
 
   return (
     <>
-      <h1 className='text-xl text-blue-900'>hellow world </h1>
+    <BrowserRouter>
+    <Routes>
+        <Route path="/auth" element={<LoginPage />} />
+        <Route path="/dashboard" element={<Layout />}>
+          <Route index element={<ListPage />} />
+          <Route path="chat" element={<ChatPage />} />
+          <Route path="profile" element={<ProfilePage />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/dashboard" />} />
+      </Routes>
+    </BrowserRouter>
+      
     </>
   )
 }
